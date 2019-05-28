@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const expressValidator = require('express-validator');
 const config = require('./config/database');
 
-
 mongoose.connect(config.database, { useNewUrlParser: true });
 
 let db = mongoose.connection;
@@ -22,13 +21,13 @@ db.on('error', (err) => {
 const app = express();
 
 app.use(expressValidator());
+app.use(express.static(__dirname + '/dist'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
 app.get('/', (req, res) => {
     res.render('index');
 });
-
 
 //Start Server 
 app.listen(5010, () => {
